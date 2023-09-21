@@ -1,7 +1,5 @@
 let steps;
-
 function getStepsForTea() {
-
   steps = [
     "Step 2: Preheat cup or teapot (optional)",
     "Step 3: Add tea",
@@ -58,7 +56,7 @@ const axios = require('axios');
     to: data,
     type: "text",
     text: {
-      body: stepscake,
+      body: stepsTea,
     },
     rating_type: "thumb",
   };
@@ -84,12 +82,12 @@ async function  sendSessionMessage2(data) {
   
   const apiUrl = "https://v1-api.swiftchat.ai/api/bots/0211321361171423/messages";
   const apiKey = "1a6acaf6-abd4-47d5-8652-45990cd74d89";
-console.log(data)
+
   const requestBody = {
     to: data,
     type: "text",
     text: {
-      body: stepsTea,
+      body: stepscake,
     },
     rating_type: "thumb",
   };
@@ -109,8 +107,6 @@ console.log(data)
 }
 
 
-
-
 app.post('/webhook', (req, res) => {
     console.log(req.body.text); 
     
@@ -124,8 +120,6 @@ app.post('/webhook', (req, res) => {
         const id = sendSessionMessage2(req.body.from)
       }
       
-      
-
     }
 );
 
