@@ -13,13 +13,13 @@ function getStepsForTea() {
 
   let result = "";
   steps.forEach((step, index) => {
-      result += `  ${step}\n`;
+    result += `  ${step}\n`;
   });
 
   return result;
 }
 
-let stepsTea= getStepsForTea();
+let stepsTea = getStepsForTea();
 function getStepsforCake() {
   steps = [
     "Step 1: Mix flour",
@@ -30,7 +30,7 @@ function getStepsforCake() {
 
   let result = "";
   steps.forEach((step, index) => {
-      result += `  ${step}\n`;
+    result += `  ${step}\n`;
   });
 
   return result;
@@ -47,8 +47,8 @@ app.use(bodyParser.json());
 
 const axios = require('axios');
 
- async function  sendSessionMessage(data) {
-  
+async function sendMessageForTea(data) {
+
   const apiUrl = "https://v1-api.swiftchat.ai/api/bots/0211321361171423/messages";
   const apiKey = "1a6acaf6-abd4-47d5-8652-45990cd74d89";
 
@@ -67,7 +67,7 @@ const axios = require('axios');
   };
 
   try {
-    const response =  await axios.post(apiUrl, requestBody, { headers });
+    const response = await axios.post(apiUrl, requestBody, { headers });
     return response.data;
   } catch (error) {
     console.error("API Error:", error);
@@ -78,8 +78,8 @@ const axios = require('axios');
 
 
 
-async function  sendSessionMessage2(data) {
-  
+async function sendMessageForCake(data) {
+
   const apiUrl = "https://v1-api.swiftchat.ai/api/bots/0211321361171423/messages";
   const apiKey = "1a6acaf6-abd4-47d5-8652-45990cd74d89";
 
@@ -98,7 +98,7 @@ async function  sendSessionMessage2(data) {
   };
 
   try {
-    const response =  await axios.post(apiUrl, requestBody, { headers });
+    const response = await axios.post(apiUrl, requestBody, { headers });
     return response.data;
   } catch (error) {
     console.error("API Error:", error);
@@ -108,21 +108,21 @@ async function  sendSessionMessage2(data) {
 
 
 app.post('/webhook', (req, res) => {
-    console.log(req.body.text); 
-    
-      if(req.body.text.body=="Tea reciepe"){
+  console.log(req.body.text);
 
-        const id = sendSessionMessage(req.body.from)
-      }
-      
-      if(req.body.text.body=="cake"){
+  if (req.body.text.body == "Tea reciepe") {
 
-        const id = sendSessionMessage2(req.body.from)
-      }
-      
-    }
+    const id = sendMessageForTea(req.body.from)
+  }
+
+  if (req.body.text.body == "cake") {
+
+    const id = sendMessageForCake(req.body.from)
+  }
+
+}
 );
 
 app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+  console.log(`Server is running on port ${PORT}`);
 });
